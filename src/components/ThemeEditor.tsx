@@ -4,7 +4,7 @@ import { Palette, Upload, Download, RotateCcw, ChevronDown, ChevronUp } from 'lu
 import type { UnifiedTheme } from '@/lib/theme';
 import { DEFAULT_THEME } from '@/lib/theme'
 import ColorSection from './ColorSection'
-import CodePreview from './CodePreview'
+import PreviewPane from './PreviewPane'
 import ImportDialog from './ImportDialog'
 import ExportDialog from './ExportDialog'
 import type { Checkpoint } from './CheckpointBar';
@@ -207,7 +207,7 @@ export default function ThemeEditor() {
 
         {/* Code preview */}
         <main className="flex-1 min-w-0 overflow-auto p-5">
-          <CodePreview theme={theme} />
+          <PreviewPane theme={theme} />
         </main>
       </div>
 
