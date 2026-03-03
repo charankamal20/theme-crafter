@@ -98,11 +98,11 @@ export default function ExportDialog({ theme, onClose }: { theme: UnifiedTheme; 
         {/* ── Social CTA ─────────────────────────────────────── */}
         <div className="mt-5 pt-4 border-t border-white/10">
           <p className="text-xs text-gray-500 mb-3 text-center">
-            Enjoying ThemeCrafter? It helps a lot 🙏
+            Enjoying ThemeCrafter? Give a star ⭐ 
           </p>
           <div className="flex items-center justify-center gap-2 flex-wrap">
             <a
-              href="https://github.com/classikh/theme-crafter"
+              href="https://github.com/charankamal20/theme-crafter"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs
@@ -113,7 +113,7 @@ export default function ExportDialog({ theme, onClose }: { theme: UnifiedTheme; 
               Star on GitHub
             </a>
             <a
-              href="https://github.com/classikh"
+              href="https://github.com/charankamal20"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs
@@ -121,10 +121,10 @@ export default function ExportDialog({ theme, onClose }: { theme: UnifiedTheme; 
                  text-gray-300 hover:text-white transition-colors"
             >
               <Github className="w-3.5 h-3.5" />
-              Follow @classikh
+              Follow @charankamal20
             </a>
             <a
-              href="https://x.com/classikh"
+              href="https://x.com/charandoesitall"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs
