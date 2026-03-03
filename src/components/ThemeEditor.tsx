@@ -10,6 +10,8 @@ import ExportDialog from './ExportDialog'
 import type { Checkpoint } from './CheckpointBar';
 import CheckpointBar from './CheckpointBar'
 import ResizeHandle from './ResizeHandle'
+import PresetPicker from './PresetPicker'
+import type { ThemePreset } from '@/lib/presets'
 
 type BottomTab = 'palette' | 'checkpoints'
 
@@ -66,6 +68,10 @@ export default function ThemeEditor() {
     setSizes(loadJSON(SIZES_KEY, DEFAULT_SIZES))
   }, [])
 
+
+  const handlePresetSelect = (preset: ThemePreset) => {
+    dispatch({ type: 'SET', theme: { ...preset.theme, name: preset.theme.name } })
+  }
   // Persist sizes on change
   useEffect(() => {
     localStorage.setItem(SIZES_KEY, JSON.stringify(sizes))
@@ -133,6 +139,8 @@ export default function ThemeEditor() {
             >{t}</button>
           ))}
         </div>
+
+        <PresetPicker onSelect={handlePresetSelect} />
 
         <div className="flex items-center gap-2 ml-auto">
           <button
