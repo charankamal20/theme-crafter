@@ -35,7 +35,7 @@ export const metadata: Metadata = {
       'Visual theme editor with live code preview. Export to Neovim, VSCode, tmux, Ghostty, Kitty, Alacritty and WezTerm.',
     images: [
       {
-        url: '/og.png',          // place themecrafter_og.png as public/og.png
+        url: './og.png',
         width: 1200,
         height: 630,
         alt: 'ThemeCrafter — Code Editor Theme Creator',
