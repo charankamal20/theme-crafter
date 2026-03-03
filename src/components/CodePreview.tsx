@@ -506,40 +506,39 @@ function buildShikiTheme(t: UnifiedTheme): ThemeRegistrationRaw {
   return {
     name: 'custom-preview',
     type: t.type,
-    // Required by ThemeRegistrationRaw — global editor defaults
     settings: [
       {
+        // No `scope` key at all = global fallback for all unmatched tokens
         settings: {
           background: t.editor.background,
           foreground: t.editor.foreground,
         },
       },
+      { scope: 'comment',                                                         settings: { foreground: t.syntax.comment,     fontStyle: 'italic' } },
+      { scope: 'keyword, keyword.control, storage.type, storage.modifier',        settings: { foreground: t.syntax.keyword } },
+      { scope: 'string, string.quoted, string.template',                          settings: { foreground: t.syntax.string } },
+      { scope: 'constant.numeric',                                                settings: { foreground: t.syntax.number } },
+      { scope: 'entity.name.function, support.function',                          settings: { foreground: t.syntax.function } },
+      { scope: 'variable, variable.other',                                        settings: { foreground: t.syntax.variable } },
+      { scope: 'entity.name.type, support.type',                                  settings: { foreground: t.syntax.type } },
+      { scope: 'keyword.operator',                                                 settings: { foreground: t.syntax.operator } },
+      { scope: 'punctuation',                                                      settings: { foreground: t.syntax.punctuation } },
+      { scope: 'entity.name.tag',                                                  settings: { foreground: t.syntax.tag } },
+      { scope: 'entity.other.attribute-name',                                      settings: { foreground: t.syntax.attribute } },
+      { scope: 'constant.language, support.constant',                             settings: { foreground: t.syntax.constant } },
+      { scope: 'support.class, support.type.builtin',                             settings: { foreground: t.syntax.builtin } },
+      { scope: 'variable.parameter',                                               settings: { foreground: t.syntax.parameter } },
     ],
+    // Keep colors for editor chrome (bg, cursor, etc.)
     colors: {
-      'editor.background': t.editor.background,
-      'editor.foreground': t.editor.foreground,
-      'editorCursor.foreground': t.editor.cursor,
-      'editor.selectionBackground': t.editor.selection,
-      'editor.lineHighlightBackground': t.editor.lineHighlight,
-      'editorLineNumber.foreground': t.editor.lineNumber,
+      'editor.background':                 t.editor.background,
+      'editor.foreground':                 t.editor.foreground,
+      'editorCursor.foreground':           t.editor.cursor,
+      'editor.selectionBackground':        t.editor.selection,
+      'editor.lineHighlightBackground':    t.editor.lineHighlight,
+      'editorLineNumber.foreground':       t.editor.lineNumber,
       'editorLineNumber.activeForeground': t.editor.lineNumberActive,
     },
-    tokenColors: [
-      { scope: ['comment'], settings: { foreground: t.syntax.comment, fontStyle: 'italic' } },
-      { scope: ['keyword', 'keyword.control', 'storage.type', 'storage.modifier'], settings: { foreground: t.syntax.keyword } },
-      { scope: ['string', 'string.quoted', 'string.template'], settings: { foreground: t.syntax.string } },
-      { scope: ['constant.numeric'], settings: { foreground: t.syntax.number } },
-      { scope: ['entity.name.function', 'support.function'], settings: { foreground: t.syntax.function } },
-      { scope: ['variable', 'variable.other'], settings: { foreground: t.syntax.variable } },
-      { scope: ['entity.name.type', 'support.type'], settings: { foreground: t.syntax.type } },
-      { scope: ['keyword.operator'], settings: { foreground: t.syntax.operator } },
-      { scope: ['punctuation'], settings: { foreground: t.syntax.punctuation } },
-      { scope: ['entity.name.tag'], settings: { foreground: t.syntax.tag } },
-      { scope: ['entity.other.attribute-name'], settings: { foreground: t.syntax.attribute } },
-      { scope: ['constant.language', 'support.constant'], settings: { foreground: t.syntax.constant } },
-      { scope: ['support.class', 'support.type.builtin'], settings: { foreground: t.syntax.builtin } },
-      { scope: ['variable.parameter'], settings: { foreground: t.syntax.parameter } },
-    ],
   }
 }
 

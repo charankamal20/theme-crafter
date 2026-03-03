@@ -54,7 +54,6 @@ function saveCheckpoints(cps: Checkpoint[]) {
 
 export default function ThemeEditor() {
   const [theme, dispatch] = useReducer(themeReducer, DEFAULT_THEME)
-  const [, setTheme] = useState<UnifiedTheme>(DEFAULT_THEME)
   const [showImport, setShowImport] = useState(false)
   const [showExport, setShowExport] = useState(false)
   const [bottomTab, setBottomTab] = useState<BottomTab>('palette')
@@ -92,7 +91,7 @@ export default function ThemeEditor() {
     setBottomOpen(true)
   }
 
-  const handleRestoreCheckpoint = (cp: Checkpoint) => dispatch({type: 'SET', theme: structuredClone(cp.theme)})
+  const handleRestoreCheckpoint = (cp: Checkpoint) => dispatch({ type: 'SET', theme: structuredClone(cp.theme) })
 
   const handleDeleteCheckpoint = (id: string) => {
     const updated = checkpoints.filter((c) => c.id !== id)
@@ -121,14 +120,14 @@ export default function ThemeEditor() {
 
         <input
           value={theme.name}
-          onChange={(e) => setTheme((p) => ({ ...p, name: e.target.value }))}
+          onChange={(e) => dispatch({ type: 'SET', theme: { ...theme, name: e.target.value } })}
           className="bg-white/5 border border-white/10 rounded px-2 py-1 text-sm text-gray-300 w-44 outline-none focus:border-purple-500"
           placeholder="Theme name"
         />
 
         <div className="flex items-center gap-1 bg-white/5 rounded-lg p-0.5">
           {(['dark', 'light'] as const).map((t) => (
-            <button key={t} onClick={() => setTheme((p) => ({ ...p, type: t }))}
+            <button key={t} onClick={() => dispatch({ type: 'SET', theme: { ...theme, type: t } })}
               className={`px-2.5 py-1 rounded text-xs transition-colors ${theme.type === t ? 'bg-white/20 text-white' : 'text-gray-500 hover:text-gray-300'
                 }`}
             >{t}</button>
@@ -142,7 +141,7 @@ export default function ThemeEditor() {
           >
             💾 Checkpoint
           </button>
-          <button onClick={() => setTheme(DEFAULT_THEME)}
+          <button onClick={() => dispatch({ type: 'RESET' })}
             className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-gray-400 hover:text-white rounded hover:bg-white/5"
           >
             <RotateCcw className="w-3.5 h-3.5" /> Reset
@@ -286,7 +285,7 @@ export default function ThemeEditor() {
       {/* ── Dialogs ─────────────────────────────────────────────── */}
       {showImport && (
         <ImportDialog
-          onImport={(t) => { setTheme(t); setShowImport(false) }}
+          onImport={(t) => { dispatch({ type: 'SET', theme: t }); setShowImport(false) }}
           onClose={() => setShowImport(false)}
         />
       )}
