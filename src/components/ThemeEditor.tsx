@@ -6,7 +6,10 @@ import { DEFAULT_THEME } from '@/lib/theme'
 import ColorSection from './ColorSection'
 import PreviewPane from './PreviewPane'
 import ImportDialog from './ImportDialog'
+import { decodeTheme } from '@/lib/share'
 import ExportDialog from './ExportDialog'
+import ShareButton from './ShareButton'
+import HueShiftControl from './HueShiftControl'
 import type { Checkpoint } from './CheckpointBar';
 import CheckpointBar from './CheckpointBar'
 import ResizeHandle from './ResizeHandle'
@@ -68,6 +71,18 @@ export default function ThemeEditor() {
     setSizes(loadJSON(SIZES_KEY, DEFAULT_SIZES))
   }, [])
 
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    const t = params.get('t')
+    if (!t) return
+
+    decodeTheme(t)
+      .then((theme) => dispatch({ type: 'SET', theme }))
+      .catch(console.error)
+
+    // Clean URL without reloading
+    window.history.replaceState({}, '', window.location.pathname)
+  }, [])
 
   const handlePresetSelect = (preset: ThemePreset) => {
     dispatch({ type: 'SET', theme: { ...preset.theme, name: preset.theme.name } })
@@ -141,6 +156,7 @@ export default function ThemeEditor() {
         </div>
 
         <PresetPicker onSelect={handlePresetSelect} />
+        <ShareButton theme={theme} />
 
         <div className="flex items-center gap-2 ml-auto">
           <button
@@ -182,6 +198,10 @@ export default function ThemeEditor() {
                [scrollbar-width:thin]
                [scrollbar-color:#313244_transparent]"
           >
+            <HueShiftControl
+              theme={theme}
+              onChange={(shifted) => dispatch({ type: 'SET', theme: shifted })}
+            />
             <ColorSection
               title="Editor UI"
               colors={theme.editor}

@@ -45,7 +45,7 @@ const ColorSection = memo(function ColorSection({ title, colors, onChange, defau
               <ColorPicker
                 key={key}
                 label={key.replace(/([A-Z])/g, ' $1').toLowerCase()}
-                color={value}
+                value={value}
                 onChange={(v) => onChange(key, v)}
               />
             ))}
